@@ -15,8 +15,8 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
       * **Nome da editora**: cadeia de caracteres
       * **Idioma**: cadeia de caracteres
       * **Ano de publicação**: inteiro que representa um ano de calendário, isto é, positivo e menor ou igual a 2024
-      * **Quantidade em estoque**:
-      * **Preço**:
+      * **Quantidade em estoque**: número inteiro de itens do produto em estoque na loja
+      * **Preço**: valor monetário em real referente ao preço unitário de um item
   * **Revista**: é um produto
     * Toda revista está associada com uma editora que a publica
     * Toda revista uma única temática que a classifica dentro da livraria entre outras revistas
@@ -29,6 +29,7 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
   * Uma editora pode publicar tanto livros, quanto revistas
   * Toda editora possui:
     * Nome: cadeia de caracteres, é único.
+    * Localização: cidade de operação, cadeia de caracteres
 * **Cliente**: quem realiza compras na livraria
   * Um cliente pode fazer a compra de múltiplos produtos distintos e em qualquer quantidade, desde que a loja possua em estoque
   * Quando efetivada, a compra realizada gera um número único de nota fiscal, data e hora da compra
@@ -36,3 +37,7 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
     * **Primeiro nome**: cadeia de caracteres
     * **Último nome**: cadeia de caracteres
     * **CPF**: identificador de 11 dígitos único do usuário no território brasileiro
+    * **Endereço**:
+      * **CEP**: identificador numérico de logradouro no território brasileiro
+      * **Rua**: cadeia de caracteres
+      * **Número de residência**: número inteiro
