@@ -2,17 +2,16 @@
 
 Uma livraria tem a intenção de armazenar a informação de seus produtos e clientes em um banco de dados conforme seus dados
 
-* Produto: são exclusivamente dos tipos Livro ou Revista
+* Produto: são exclusivamente dos tipos Livro, Revista ou Marca-página
   * Livro: é um produto
     * Todo livro está associado com uma única categoria que o classifica dentro da livraria entre outros livros
-    * Todo livro está associado com um ou mais autores
+    * Um gênero possui nome próprio único e um fator de desconto, real, aplicado na compra para incentivar a venda de certos gêneros de livros
     * Todo livro possui:
       * **Título**: cadeida de caracteres, é único dentro do contexto da livraria no problema
       * **Nome(s) do autor(es)**: cadeia de caracteres
       * **ISBN**: número identificador único  de 13 dígitos (*International Standard Book Number*)
       * **Edição**: número inteiro
       * **Número de páginas**: número inteiro
-      * **Nome da editora**: cadeia de caracteres
       * **Idioma**: cadeia de caracteres
       * **Ano de publicação**: inteiro que representa um ano de calendário, isto é, positivo e menor ou igual a 2024
       * **Quantidade em estoque**: número inteiro de itens do produto em estoque na loja
@@ -20,16 +19,22 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
   * **Revista**: é um produto
     * Toda revista está associada com uma editora que a publica
     * Toda revista uma única temática que a classifica dentro da livraria entre outras revistas
+    * Uma temática contém nome próprio único e um fator de desconto, real, aplicado na compra para incentivar a venda de certos temas de revistas
     * Toda revista possui:
       * **Nome**: cadeia de caracteres
       * **Número de páginas**: número inteiro
       * **Data de publicação**: data que contém dia, mês e ano da publicação
       * **ISSN**: número de identificador único de 8 dígitos (*International Standard Serial Number*)
+  * Marca-página: é um produto
+    * Junto a livros e revistas, marca-páginas também são vendidos para auxiliar a leitura
+    * É do tipo de produto genérico que são comprados sem marcas e rótulos dos fornecedores, possuindo apenas:
+      * **Código**: número inteiro identificador único dentre inúmeros outros marca-páginas
+      * **Cor**: cadeia de caracteres
 * **Editora**: é quem publica livros e revistas
   * Uma editora pode publicar tanto livros, quanto revistas
   * Toda editora possui:
-    * Nome: cadeia de caracteres, é único.
-    * Localização: cidade de operação, cadeia de caracteres
+    * **Nome**: cadeia de caracteres, é único.
+    * **Localização**: cidade de operação, cadeia de caracteres
 * **Cliente**: quem realiza compras na livraria
   * Um cliente pode fazer a compra de múltiplos produtos distintos e em qualquer quantidade, desde que a loja possua em estoque
   * Quando efetivada, a compra realizada gera um número único de nota fiscal, data e hora da compra
