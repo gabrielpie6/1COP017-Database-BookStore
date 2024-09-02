@@ -27,7 +27,7 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
       * **Número de páginas**: número inteiro
       * **Data de publicação**: data que contém dia, mês e ano da publicação
       * **ISSN**: número de identificador único de 8 dígitos (*International Standard Serial Number*)
-  * Marca-página: é um produto
+  * **Marca-página**: é um produto
     * Junto a livros e revistas, marca-páginas também são vendidos para auxiliar a leitura
     * É do tipo de produto genérico que são comprados sem marcas e rótulos dos fornecedores, tendo como informação apenas sua cor
 * **Editora**: é quem publica livros e revistas
@@ -37,7 +37,7 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
     * **Localização**: cidade de operação, cadeia de caracteres
 * **Cliente**: quem realiza compras na livraria
   * Um cliente pode fazer a compra de múltiplos produtos distintos e em qualquer quantidade, desde que a loja possua em estoque
-  * Quando efetivada, a compra realizada gera um número único de nota fiscal, data e hora da compra
+  * Quando efetivada, a compra realizada gera um número único de nota fiscal, valor total a ser pago, data e hora da compra
   * No cadastro de clientes da loja, armazena-se:
     * **Primeiro nome**: cadeia de caracteres
     * **Último nome**: cadeia de caracteres
