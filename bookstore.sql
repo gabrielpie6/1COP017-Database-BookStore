@@ -3,9 +3,10 @@ CREATE SCHEMA bookstore;
 CREATE TABLE bookstore.product (
     cod    INT,
     price  DECIMAL(10, 2),
-    amount INT,
+    amount INT ,
 
-    CONSTRAINT pk_product PRIMARY KEY (cod)
+    CONSTRAINT pk_product PRIMARY KEY (cod),
+    CONSTRAINT amount_positive CHECK (amount >= 0)
 );
 
 CREATE TABLE bookstore.publisher (
