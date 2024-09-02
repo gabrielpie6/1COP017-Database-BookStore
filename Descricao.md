@@ -3,13 +3,15 @@
 Uma livraria tem a intenção de armazenar a informação de seus produtos e clientes em um banco de dados conforme seus dados
 
 * Produto: são exclusivamente dos tipos Livro, Revista ou Marca-página
+  * São elementos que clientes compram na loja
+  * Possuem um preço, quantidade em estoque e um código único de identificação interno da loja
   * Livro: é um produto
     * Todo livro está associado com uma única categoria que o classifica dentro da livraria entre outros livros
     * Um gênero possui nome próprio único e um fator de desconto, real, aplicado na compra para incentivar a venda de certos gêneros de livros
     * Todo livro possui:
       * **Título**: cadeida de caracteres, é único dentro do contexto da livraria no problema
       * **Nome(s) do autor(es)**: cadeia de caracteres
-      * **ISBN**: número identificador único  de 13 dígitos (*International Standard Book Number*)
+      * **ISBN**: número identificador único de 13 dígitos (*International Standard Book Number*)
       * **Edição**: número inteiro
       * **Número de páginas**: número inteiro
       * **Idioma**: cadeia de caracteres
@@ -27,9 +29,7 @@ Uma livraria tem a intenção de armazenar a informação de seus produtos e cli
       * **ISSN**: número de identificador único de 8 dígitos (*International Standard Serial Number*)
   * Marca-página: é um produto
     * Junto a livros e revistas, marca-páginas também são vendidos para auxiliar a leitura
-    * É do tipo de produto genérico que são comprados sem marcas e rótulos dos fornecedores, possuindo apenas:
-      * **Código**: número inteiro identificador único dentre inúmeros outros marca-páginas
-      * **Cor**: cadeia de caracteres
+    * É do tipo de produto genérico que são comprados sem marcas e rótulos dos fornecedores, tendo como informação apenas sua cor
 * **Editora**: é quem publica livros e revistas
   * Uma editora pode publicar tanto livros, quanto revistas
   * Toda editora possui:
