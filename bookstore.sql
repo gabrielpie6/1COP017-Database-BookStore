@@ -38,7 +38,8 @@ CREATE TABLE bookstore.book (
     CONSTRAINT fk_publisher FOREIGN KEY (fk_publisher_fname) REFERENCES bookstore.publisher(fname),
     CONSTRAINT fk_genre     FOREIGN KEY (fk_genre_fname)     REFERENCES bookstore.genre(fname),
 
-    CONSTRAINT isbn_only_numbers CHECK (ISBN ~ '^[0-9]{1,13}$')
+    CONSTRAINT isbn_only_numbers      CHECK (ISBN ~ '^[0-9]{1,13}$'),
+    CONSTRAINT publication_year_valid CHECK (publication_year > 0 AND publication_year <= EXTRACT(YEAR FROM CURRENT_DATE))
 );
 
 CREATE TABLE bookstore.book_author (

@@ -1,0 +1,17 @@
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (1, 'J. K. Rowling');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (1, 'J. R. R. Tolkien');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (2, 'L. Tolstoy');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (3, 'D. Brown');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (4, 'S. King');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (5, 'D. Brown');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (6, 'D. Brown');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (7, 'S. King');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (7, 'L. Tolstoy');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (8, 'L. Tolstoy');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (9, 'J. R. R. Tolkien');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (10, 'J. K. Rowling');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (10, 'J. R. R. Tolkien');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (10, 'D. Brown');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (10, 'J. Austen');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (11, 'J. Austen');
+INSERT INTO bookstore.book_author (fk_book_cod, author_name) VALUES (12, 'A. Christie');

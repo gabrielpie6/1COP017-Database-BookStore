@@ -1,0 +1,12 @@
+INSERT INTO bookstore.product (cod, price, amount) VALUES (1, 100.00, 10);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (2,  90.00, 20);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (3,  80.00, 30);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (4,  70.00, 40);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (5,  60.00, 50);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (6,  50.00, 60);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (7,  40.00, 70);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (8,  30.00, 80);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (9,  20.00, 90);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (10, 10.00, 100);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (11,  9.00, 110);
+INSERT INTO bookstore.product (cod, price, amount) VALUES (12,  8.00, 120);
