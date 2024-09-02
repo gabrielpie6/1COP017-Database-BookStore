@@ -95,9 +95,8 @@ CREATE TABLE bookstore.customer (
 );
 
 CREATE TABLE bookstore.purchase (
-    invoice_number  SERIAL,
-    date_hour       TIMESTAMP,
-    total_price     DECIMAL(10, 2),
+    invoice_number  INT,
+    date_hour       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fk_customer_cpf CHAR(11) NOT NULL,
 
     CONSTRAINT pk_purchase PRIMARY KEY (invoice_number),

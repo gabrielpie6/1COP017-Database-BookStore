@@ -1,0 +1,4 @@
+INSERT INTO bookstore.customer (cpf, fname, lname, CEP, address_street, address_number) VALUES ('12345678901', 'John', 'Doe', '12345678', 'Rua Um', 40);
+INSERT INTO bookstore.customer (cpf, fname, lname, CEP, address_street, address_number) VALUES ('12345678902', 'Adriano', 'Silva', '12345678', 'Rua Dois', 41);
+INSERT INTO bookstore.customer (cpf, fname, lname, CEP, address_street, address_number) VALUES ('98765432109', 'John', 'Doe', '87654321', 'Rua Três', 42);
+INSERT INTO bookstore.customer (cpf, fname, lname, CEP, address_street, address_number) VALUES ('98765432110', 'Sherlock', 'Holmes', '12345678', 'Rua Um', 40);
