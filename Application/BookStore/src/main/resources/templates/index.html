@@ -1,0 +1,27 @@
+<div th:switch="${products}">
+    <h2 th:case="null">Ainda não há produtos!</h2>
+    <div th:case="*">
+        <h2>Produtos Cadastrados</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Editar</th>
+                <th>Remover</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.cod}"></td>
+                <td th:text="${product.price.toString}"></td>
+                <td th:text="${product.amount.toString}"></td>
+                <td><a th:href="@{/editar/{id}(id=${product.cod})}">Editar</a></td>
+                <td><a th:href="@{/remover/{id}(id=${product.cod})}">Remover</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/novo-produto">Adicionar um novo produto</a></p>
+</div>
