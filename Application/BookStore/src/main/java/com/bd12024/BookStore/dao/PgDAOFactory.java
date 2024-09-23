@@ -23,4 +23,9 @@ public class PgDAOFactory extends DAOFactory {
     public PublisherDAO getPublisherDAO() {
         return new PgPublisherDAO(this.connection);
     }
+
+    @Override
+    public BookDAO getBookDAO() {
+        return new PgBookDAO(this.connection);
+    }
 }

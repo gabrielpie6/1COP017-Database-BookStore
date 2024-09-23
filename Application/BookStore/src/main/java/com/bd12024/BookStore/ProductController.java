@@ -1,17 +1,13 @@
 package com.bd12024.BookStore;
 
 
-import com.bd12024.BookStore.dao.DAOFactory;
-import com.bd12024.BookStore.dao.GenreDAO;
-import com.bd12024.BookStore.dao.PublisherDAO;
-import com.bd12024.BookStore.dao.ThemeDAO;
+import com.bd12024.BookStore.dao.*;
 import com.bd12024.BookStore.entities.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +17,6 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    ProductRepository productRepository;
 
     @GetMapping(value={"/index", "/"})
     public String showMainPage(Model model) {
@@ -31,14 +26,94 @@ public class ProductController {
 
     @GetMapping(value={"/list-books"})
     public String showBooksList(Model model) {
-        List<Book> mylist = new ArrayList<>();
-        mylist.add(
-                new Book(1, 2.0, 15, 1,"oi",1,"io", 1,100, null, null)
-        );
+        BookDAO dao;
 
-        model.addAttribute("books", mylist);
+        List<Book> booksList;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getBookDAO();
+            booksList = dao.all();
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("books",      booksList);
         return "list-books";
     }
+    @GetMapping("/new-book")
+    public String showFormNewBook(Model model){
+        Book book = new Book();
+        book.setPublisher(new Publisher("DUMMY", "DUMMY"));
+        book.setGenre(new Genre("DUMMY", -1.0));
+
+        model.addAttribute("book", book);
+        return "new-book";
+    }
+    @PostMapping("/add-book")
+    public String addBook(Book book, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/new-book";
+        }
+
+        String publisher_name = book.getPublisher().getName();
+        String genre_name     = book.getGenre().getName();
+
+
+        PublisherDAO daoPub;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            daoPub = daoFactory.getPublisherDAO();
+            book.setPublisher(  daoPub.read(publisher_name) );
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            book.setPublisher(new Publisher("NOT_FOUND", "NOT_FOUND") );
+        }
+
+        GenreDAO daoGen;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            daoGen = daoFactory.getGenreDAO();
+            book.setGenre(  daoGen.read(genre_name)  );
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            book.setGenre(new Genre("NOT_FOUND", 0.0) );
+        }
+
+
+
+
+        BookDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getBookDAO();
+            dao.create(book);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/new-book";
+        }
+
+        return "redirect:/list-books";
+    }
+    @GetMapping("/remove-book/{id}")
+    public String removeBook(@PathVariable("id") int id) {
+        BookDAO dao;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getBookDAO();
+            dao.delete(id);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/list-books";
+        }
+        return "redirect:/list-books";
+    }
+
+
+
+
 
 
 

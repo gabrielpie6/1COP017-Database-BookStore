@@ -9,6 +9,7 @@ public class Publisher {
         this.city = city;
     }
 
+
     public Publisher() { }
 
     public String getName() {
