@@ -1,0 +1,12 @@
+<form action="#"
+      th:action="@{/add-genre}"
+      th:object="${genre}"
+      method="post">
+  <label for="nome">Nome: </label>
+  <input type="text" th:field="*{name}" id="nome">
+  <br/>
+  <label for="desconto">Desconto:</label>
+  <input type="number" th:field="*{discount}" step="0.01" id="desconto">
+  <br/>
+  <input type="submit" value="Adicionar">
+</form>

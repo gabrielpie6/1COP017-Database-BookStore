@@ -1,0 +1,27 @@
+<div th:switch="${genres}">
+    <h2 th:case="null">Ainda não há gêneros!</h2>
+    <div th:case="*">
+        <h2>Gêneros Cadastrados</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Desconto percentual (%)</th>
+                <th>Títulos</th>
+                <th>Editar</th>
+                <th>Remover</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="genre : ${genres}">
+                <td th:text="${genre.name}"></td>
+                <td th:text="${genre.getFormattedDiscount}"></td>
+                <td th:text="${booksCounts.get(genres.indexOf(genre))}"></td>
+                <td><a th:href="@{/edit-genre/{id}(id=${genre.name})}">Editar</a></td>
+                <td><a th:href="@{/remove-genre/{id}(id=${genre.name})}">Remover</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/new-genre">Adicionar um novo gênero</a></p>
+</div>

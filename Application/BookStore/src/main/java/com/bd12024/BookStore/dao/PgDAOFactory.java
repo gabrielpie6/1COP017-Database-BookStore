@@ -1,0 +1,25 @@
+package com.bd12024.BookStore.dao;
+
+import java.sql.Connection;
+
+/**
+ *
+ * @author dskaster
+ */
+public class PgDAOFactory extends DAOFactory {
+
+    public PgDAOFactory(Connection connection) {
+        this.connection = connection;
+    }
+
+    @Override
+    public GenreDAO getGenreDAO() {
+        return new PgGenreDAO(this.connection);
+    }
+
+    @Override
+    public ThemeDAO getThemeDAO() {
+        return new PgThemeDAO(this.connection);
+    }
+
+}

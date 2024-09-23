@@ -1,27 +1,37 @@
-<div th:switch="${products}">
+<div th:switch="${books}">
     <h2 th:case="null">Ainda não há produtos!</h2>
     <div th:case="*">
-        <h2>Produtos Cadastrados</h2>
+        <h2>Livros Cadastrados</h2>
         <table>
             <thead>
             <tr>
-                <th>Nome</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
+                <th>Título</th>
+                <th>ISBN</th>
+                <th>Edição</th>
+                <th>Língua</th>
+                <th>No. Páginas</th>
+                <th>Ano de publicação</th>
+                <th>Editora</th>
+                <th>Gênero</th>
                 <th>Editar</th>
                 <th>Remover</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.cod}"></td>
-                <td th:text="${product.price.toString}"></td>
-                <td th:text="${product.amount.toString}"></td>
-                <td><a th:href="@{/editar/{id}(id=${product.cod})}">Editar</a></td>
-                <td><a th:href="@{/remover/{id}(id=${product.cod})}">Remover</a></td>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.ISBN.toString}"></td>
+                <td th:text="${book.edition.toString}"></td>
+                <td th:text="${book.language}"></td>
+                <td th:text="${book.pages.toString}"></td>
+                <td th:text="${book.publication_year.toString}"></td>
+                <td th:text="Publisher"></td>
+                <td th:text="Genre"></td>
+                <td><a th:href="@{/edit-book/{id}(id=${book.cod})}">Editar</a></td>
+                <td><a th:href="@{/remove-book/{id}(id=${book.cod})}">Remover</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/novo-produto">Adicionar um novo produto</a></p>
+    <p><a href="/new-book">Adicionar um novo produto</a></p>
 </div>
