@@ -5,10 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import com.bd12024.BookStore.jdbc.ConnectionFactory;
 
-/**
- *
- * @author dskaster
- */
+
 public abstract class DAOFactory implements AutoCloseable {
 
     protected Connection connection;
@@ -79,6 +76,7 @@ public abstract class DAOFactory implements AutoCloseable {
 
     public abstract GenreDAO getGenreDAO();
     public abstract ThemeDAO getThemeDAO();
+    public abstract PublisherDAO getPublisherDAO();
 
     @Override
     public void close() throws SQLException {

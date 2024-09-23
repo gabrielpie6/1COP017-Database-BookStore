@@ -2,10 +2,7 @@ package com.bd12024.BookStore.dao;
 
 import java.sql.Connection;
 
-/**
- *
- * @author dskaster
- */
+
 public class PgDAOFactory extends DAOFactory {
 
     public PgDAOFactory(Connection connection) {
@@ -22,4 +19,8 @@ public class PgDAOFactory extends DAOFactory {
         return new PgThemeDAO(this.connection);
     }
 
+    @Override
+    public PublisherDAO getPublisherDAO() {
+        return new PgPublisherDAO(this.connection);
+    }
 }

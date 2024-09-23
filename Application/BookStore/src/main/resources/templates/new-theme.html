@@ -1,8 +1,8 @@
 <form action="#"
-      th:action="@{/add-genre}"
-      th:object="${genre}"
+      th:action="@{/add-theme}"
+      th:object="${theme}"
       method="post">
-  <h2>Adicionar Gênero</h2>
+  <h2>Adicionar Tema</h2>
   <label for="nome">Nome: </label>
   <input type="text" th:field="*{name}" id="nome">
   <br/>

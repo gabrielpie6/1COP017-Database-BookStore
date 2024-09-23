@@ -3,11 +3,9 @@ package com.bd12024.BookStore;
 
 import com.bd12024.BookStore.dao.DAOFactory;
 import com.bd12024.BookStore.dao.GenreDAO;
+import com.bd12024.BookStore.dao.PublisherDAO;
 import com.bd12024.BookStore.dao.ThemeDAO;
-import com.bd12024.BookStore.entities.Book;
-import com.bd12024.BookStore.entities.Genre;
-import com.bd12024.BookStore.entities.Product;
-import com.bd12024.BookStore.entities.Theme;
+import com.bd12024.BookStore.entities.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,8 +67,6 @@ public class ProductController {
         model.addAttribute("booksCounts", booksCount);
         return "list-genres";
     }
-
-
     @GetMapping("/new-genre")
     public String showFormNewGenre(Genre genre){
         return "new-genre";
@@ -125,6 +121,89 @@ public class ProductController {
         model.addAttribute("themesCount", themesCount);
         return "list-themes";
     }
+    @GetMapping("/new-theme")
+    public String showFormNewTheme(Theme theme){
+        return "new-theme";
+    }
+    @PostMapping("/add-theme")
+    public String addTheme(Theme theme, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/new-theme";
+        }
+
+        ThemeDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getThemeDAO();
+            dao.create(theme);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/new-theme";
+        }
+
+        return "redirect:/list-themes";
+    }
+
+
+
+
+
+
+
+
+
+
+    @GetMapping(value={"/list-publishers"})
+    public String showPublishersList(Model model) {
+        PublisherDAO dao;
+
+        List<Publisher> publisherList;
+        List<Integer>   booksCount     = new ArrayList<>();
+        List<Integer>   magazinesCount = new ArrayList<>();
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getPublisherDAO();
+            publisherList = dao.all();
+
+            for (Publisher p : publisherList)
+            {
+                booksCount.add(    publisherList.indexOf(p), dao.countBooksByPublisher(    p.getName()) );
+                magazinesCount.add(publisherList.indexOf(p), dao.countMagazinesByPublisher(p.getName()) );
+            }
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("publishers",      publisherList);
+        model.addAttribute("booksCounts",     booksCount);
+        model.addAttribute("magazinesCounts", magazinesCount);
+        return "list-publishers";
+    }
+    @GetMapping("/new-publisher")
+    public String showFormNewPublisher(Publisher publisher){
+        return "new-publisher";
+    }
+    @PostMapping("/add-publisher")
+    public String addPublisher(Publisher publisher, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/new-publisher";
+        }
+
+        PublisherDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getPublisherDAO();
+            dao.create(publisher);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/new-publisher";
+        }
+
+        return "redirect:/list-publishers";
+    }
+
+
 
 
 

@@ -1,7 +1,6 @@
 package com.bd12024.BookStore.dao;
 
 import java.sql.SQLException;
-import com.bd12024.BookStore.entities.Genre;
 import com.bd12024.BookStore.entities.Theme;
 
 

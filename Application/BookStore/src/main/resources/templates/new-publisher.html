@@ -1,0 +1,13 @@
+<form action="#"
+      th:action="@{/add-publisher}"
+      th:object="${publisher}"
+      method="post">
+  <h2>Adicionar Editora</h2>
+  <label for="nome">Nome: </label>
+  <input type="text" th:field="*{name}" id="nome">
+  <br/>
+  <label for="cidade">Cidade:</label>
+  <input type="text" th:field="*{city}" id="cidade">
+  <br/>
+  <input type="submit" value="Adicionar">
+</form>
