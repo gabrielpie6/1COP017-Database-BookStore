@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Cliente</title>
+</head>
+<body>
+    <form action="#" th:action="@{/add-customer}" th:object="${customer}" method="post">
+        <h2>Adicionar Cliente</h2>
+        
+        <label for="cpf">CPF: </label>
+        <input type="text" th:field="*{cpf}" id="cpf">
+        <br/>
+        
+        <label for="fname">Nome: </label>
+        <input type="text" th:field="*{fname}" id="fname">
+        <br/>
+        
+        <label for="lname">Sobrenome: </label>
+        <input type="text" th:field="*{lname}" id="lname">
+        <br/>
+        
+        <label for="email">Email: </label>
+        <input type="email" th:field="*{email}" id="email">
+        <br/>
+        
+        <label for="cep">CEP: </label>
+        <input type="text" th:field="*{CEP}" id="cep">
+        <br/>
+        
+        <label for="address_street">Rua: </label>
+        <input type="text" th:field="*{address_street}" id="address_street">
+        <br/>
+        
+        <label for="address_number">Número: </label>
+        <input type="number" th:field="*{address_number}" id="address_number">
+        <br/>
+        
+        <input type="submit" value="Adicionar">
+    </form>
+</body>
+</html>

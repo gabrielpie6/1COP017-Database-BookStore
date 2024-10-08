@@ -24,14 +24,14 @@ public class PgBookDAO implements BookDAO {
             "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String ALL_QUERY =
-            "SELECT fk_product_cod, ISBN, title, bedition, blanguage, pages, publication_year, fk_publisher_fname, fk_genre_fname " +
-            "FROM bookstore.book " +
-            "ORDER BY fk_product_cod ASC;";
+            "SELECT p.cod, p.price, p.amount, b.ISBN, b.title, b.bedition, b.blanguage, b.pages, b.publication_year, b.fk_publisher_fname, b.fk_genre_fname " +
+            "FROM bookstore.product AS p JOIN bookstore.book AS b ON p.cod = b.fk_product_cod " +
+            "ORDER BY p.cod ASC;";
 
     private static final String READ_QUERY =
-            "SELECT fk_product_cod, ISBN, title, bedition, blanguage, pages, publication_year, fk_publisher_fname, fk_genre_fname " +
-            "FROM bookstore.book " +
-            "WHERE fk_product_cod = ?;";
+            "SELECT p.cod, p.price, p.amount, b.ISBN, b.title, b.bedition, b.blanguage, b.pages, b.publication_year, b.fk_publisher_fname, b.fk_genre_fname " +
+            "FROM bookstore.product AS p JOIN bookstore.book AS b ON p.cod = b.fk_product_cod " +
+            "WHERE p.cod = ?;";
 
     private static final String UPDATE_QUERY =
             "UPDATE bookstore.book " +
@@ -41,6 +41,10 @@ public class PgBookDAO implements BookDAO {
     private static final String DELETE_QUERY =
             "DELETE FROM bookstore.book " +
             "WHERE fk_product_cod = ?;";
+
+    private static final String CREATE_PRODUCT_QUERY =
+            "INSERT INTO bookstore.product (cod, price, amount) " +
+            "VALUES(?, ?, ?);";
 
 
     public PgBookDAO(Connection connection) {
@@ -60,6 +64,27 @@ public class PgBookDAO implements BookDAO {
     @Override
     public void create(Book book) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
+            // Creating Product to be associated with Book
+            try (PreparedStatement statementProd = connection.prepareStatement(CREATE_PRODUCT_QUERY)) {                
+                statementProd.setInt(       1, book.getCod());
+                statementProd.setDouble(    2, book.getPrice());
+                statementProd.setInt(       3, book.getAmount());
+    
+                statementProd.executeUpdate();
+            } catch (SQLException exProd) {
+                Logger.getLogger(PgBookDAO.class.getName()).log(Level.SEVERE, "DAO", exProd);
+    
+                if (exProd.getMessage().contains("uq_user_login")) {
+                    throw new SQLException("Erro ao inserir livro: produto já existente.");
+                } else if (exProd.getMessage().contains("not-null")) {
+                    throw new SQLException("Erro ao inserir livro: pelo menos um campo está em branco.");
+                } else {
+                    throw new SQLException("Erro ao inserir livro.");
+                }
+            }
+
+
+
             statement.setInt(       1, book.getCod());
             statement.setString(    2, book.getISBN());
             statement.setString(    3, book.getTitle());
@@ -94,7 +119,11 @@ public class PgBookDAO implements BookDAO {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
 
-                    book.setCod(                                 prodCod);
+                    // Product attributes
+                    book.setCod(                prodCod);
+                    book.setPrice(              result.getDouble("price"));
+                    book.setAmount(             result.getInt("amount"));
+                    // Book attributes
                     book.setISBN(               result.getString("ISBN"));
                     book.setTitle(              result.getString("title"));
                     book.setEdition(            result.getInt("bedition"));
@@ -201,7 +230,11 @@ public class PgBookDAO implements BookDAO {
              ResultSet result = statement.executeQuery()) {
             while (result.next()) {
                 Book book = new Book();
-                book.setCod(                result.getInt("fk_product_cod"));
+                // Product attributes
+                book.setCod(                result.getInt("cod"));
+                book.setPrice(              result.getDouble("price"));
+                book.setAmount(             result.getInt("amount"));
+                // Book attributes
                 book.setISBN(               result.getString("ISBN"));
                 book.setTitle(              result.getString("title"));
                 book.setEdition(            result.getInt("bedition"));

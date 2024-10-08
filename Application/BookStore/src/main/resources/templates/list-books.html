@@ -1,37 +1,52 @@
-<div th:switch="${books}">
-    <h2 th:case="null">Ainda não há livros!</h2>
-    <div th:case="*">
-        <h2>Livros Cadastrados</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Título</th>
-                <th>ISBN</th>
-                <th>Edição</th>
-                <th>Língua</th>
-                <th>No. Páginas</th>
-                <th>Ano de publicação</th>
-                <th>Editora</th>
-                <th>Gênero</th>
-                <th>Editar</th>
-                <th>Remover</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.ISBN.toString}"></td>
-                <td th:text="${book.edition.toString}"></td>
-                <td th:text="${book.language}"></td>
-                <td th:text="${book.pages.toString}"></td>
-                <td th:text="${book.publication_year.toString}"></td>
-                <td th:text="${book.publisher.name}"></td>
-                <td th:text="${book.genre.name}"></td>
-                <td><a th:href="@{/edit-book/{id}(id=${book.cod})}">Editar</a></td>
-                <td><a th:href="@{/remove-book/{id}(id=${book.cod})}">Remover</a></td>
-            </tr>
-            </tbody>
-        </table>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Livros</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div th:switch="${books}">
+        <h2 th:case="null">Ainda não há livros!</h2>
+        <div th:case="*">
+            <h2>Livros Cadastrados</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Cód. de Produto</th>
+                    <th>Preço</th>
+                    <th>Qtd. Estoque</th>
+                    <th>Título</th>
+                    <th>ISBN</th>
+                    <th>Edição</th>
+                    <th>Língua</th>
+                    <th>No. Páginas</th>
+                    <th>Ano de publicação</th>
+                    <th>Editora</th>
+                    <th>Gênero</th>
+                    <!-- <th>Editar</th> -->
+                    <th>Remover</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.cod}"></td>
+                    <td th:text="${book.price.toString}"></td>
+                    <td th:text="${book.amount.toString}"></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.ISBN.toString}"></td>
+                    <td th:text="${book.edition.toString}"></td>
+                    <td th:text="${book.language}"></td>
+                    <td th:text="${book.pages.toString}"></td>
+                    <td th:text="${book.publication_year.toString}"></td>
+                    <td th:text="${book.publisher.name}"></td>
+                    <td th:text="${book.genre.name}"></td>
+                    <!-- <td><a th:href="@{/edit-book/{id}(id=${book.cod})}">Editar</a></td> -->
+                    <td><a th:href="@{/remove-book/{id}(id=${book.cod})}">Remover</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/new-book">Adicionar um novo livro</a></p>
     </div>
-    <p><a href="/new-book">Adicionar um novo livro</a></p>
-</div>
+</body>
+</html>

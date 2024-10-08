@@ -80,6 +80,7 @@ public abstract class DAOFactory implements AutoCloseable {
     public abstract BookDAO         getBookDAO();
     public abstract MagazineDAO     getMagazineDAO();
     public abstract PagemarkDAO     getPagemarkDAO();
+    public abstract CustomerDAO     getCustomerDAO();
 
     @Override
     public void close() throws SQLException {

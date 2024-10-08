@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+</head>
+<body>
+    <form action="#" th:action="@{/update-customer}" th:object="${customer}" method="post">
+        <h2>Editar Cliente</h2>
+        
+        <input type="hidden" th:field="*{cpf}" id="cpf">
+        
+        <label for="fname">Nome: </label>
+        <input type="text" th:field="*{fname}" id="fname">
+        <br/>
+        
+        <label for="lname">Sobrenome: </label>
+        <input type="text" th:field="*{lname}" id="lname">
+        <br/>
+        
+        <label for="email">Email: </label>
+        <input type="email" th:field="*{email}" id="email">
+        <br/>
+        
+        <label for="cep">CEP: </label>
+        <input type="text" th:field="*{CEP}" id="cep">
+        <br/>
+        
+        <label for="address_street">Rua: </label>
+        <input type="text" th:field="*{address_street}" id="address_street">
+        <br/>
+        
+        <label for="address_number">Número: </label>
+        <input type="number" th:field="*{address_number}" id="address_number">
+        <br/>
+        
+        <input type="submit" value="Atualizar">
+    </form>
+</body>
+</html>

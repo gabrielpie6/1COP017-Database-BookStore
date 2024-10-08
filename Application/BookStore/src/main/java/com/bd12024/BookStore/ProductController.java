@@ -28,6 +28,11 @@ public class ProductController {
         return "products-options";
     }
 
+    @GetMapping(value={"/customers-options"})
+    public String showCustomersOptions(Model model) {
+        return "customers-options";
+    }
+
 
 
 
@@ -414,5 +419,110 @@ public class ProductController {
 
         model.addAttribute("pagemarks",      pagemarksList);
         return "list-pagemarks";
+    }
+
+
+
+
+
+
+
+
+
+    @GetMapping(value={"/list-customers"})
+    public String showCustomersList(Model model) {
+        CustomerDAO dao;
+
+        List<Customer> customersList;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getCustomerDAO();
+            customersList = dao.all();
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("customers", customersList);
+        return "list-customers";
+    }
+
+    @GetMapping("/new-customer")
+    public String showFormNewCustomer(Model model) {
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        return "new-customer";
+    }
+
+    @PostMapping("/add-customer")
+    public String addCustomer(Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/new-customer";
+        }
+
+        CustomerDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getCustomerDAO();
+            dao.create(customer);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/new-customer";
+        }
+
+        return "redirect:/list-customers";
+    }
+
+    @GetMapping("/edit-customer/{cpf}")
+    public String showFormEditCustomer(@PathVariable("cpf") String cpf, Model model) {
+        CustomerDAO dao;
+        Customer customer;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getCustomerDAO();
+            customer = dao.read(cpf);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "redirect:/list-customers";
+        }
+
+        model.addAttribute("customer", customer);
+        return "edit-customer";
+    }
+
+    @PostMapping("/update-customer")
+    public String updateCustomer(Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "edit-customer";
+        }
+
+        CustomerDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getCustomerDAO();
+            dao.update(customer);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "edit-customer";
+        }
+
+        return "redirect:/list-customers";
+    }
+
+    @GetMapping("/remove-customer/{cpf}")
+    public String removeCustomer(@PathVariable("cpf") String cpf) {
+        CustomerDAO dao;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getCustomerDAO();
+            dao.delete(cpf);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "redirect:/list-customers";
+        }
+        return "redirect:/list-customers";
     }
 }
