@@ -8,8 +8,8 @@
                 <th>Nome</th>
                 <th>Desconto percentual (%)</th>
                 <th>Títulos</th>
-                <th>Editar</th>
-                <th>Remover</th>
+                <!-- <th>Editar</th> -->
+                <!-- <th>Remover</th> -->
             </tr>
             </thead>
             <tbody>
@@ -17,8 +17,8 @@
                 <td th:text="${genre.name}"></td>
                 <td th:text="${genre.getFormattedDiscount}"></td>
                 <td th:text="${booksCounts.get(genres.indexOf(genre))}"></td>
-                <td><a th:href="@{/edit-genre/{id}(id=${genre.name})}">Editar</a></td>
-                <td><a th:href="@{/remove-genre/{id}(id=${genre.name})}">Remover</a></td>
+                <!-- <td><a th:href="@{/edit-genre/{id}(id=${genre.name})}">Editar</a></td> -->
+                <!-- <td><a th:href="@{/remove-genre/{id}(id=${genre.name})}">Remover</a></td> -->
             </tr>
             </tbody>
         </table>

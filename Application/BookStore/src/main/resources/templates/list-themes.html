@@ -8,8 +8,8 @@
                 <th>Nome</th>
                 <th>Desconto percentual (%)</th>
                 <th>Revistas</th>
-                <th>Editar</th>
-                <th>Remover</th>
+                <!-- <th>Editar</th> -->
+                <!-- <th>Remover</th> -->
             </tr>
             </thead>
             <tbody>
@@ -17,8 +17,8 @@
                 <td th:text="${theme.name}"></td>
                 <td th:text="${theme.getFormattedDiscount}"></td>
                 <td th:text="${themesCount.get(themes.indexOf(theme))}"></td>
-                <td><a th:href="@{/edit-theme/{id}(id=${theme.name})}">Editar</a></td>
-                <td><a th:href="@{/remove-theme/{id}(id=${theme.name})}">Remover</a></td>
+                <!-- <td><a th:href="@{/edit-theme/{id}(id=${theme.name})}">Editar</a></td> -->
+                <!-- <td><a th:href="@{/remove-theme/{id}(id=${theme.name})}">Remover</a></td> -->
             </tr>
             </tbody>
         </table>

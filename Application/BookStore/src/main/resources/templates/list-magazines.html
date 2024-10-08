@@ -14,7 +14,7 @@
                 <th>Data de publicação</th>
                 <th>Editora</th>
                 <th>Tema</th>
-                <th>Editar</th>
+                <!-- <th>Editar</th> -->
                 <th>Remover</th>
             </tr>
             </thead>
@@ -29,7 +29,7 @@
                 <td th:text="${magazine.publication_date.toString}"></td>
                 <td th:text="${magazine.publisher.name}"></td>
                 <td th:text="${magazine.theme.name}"></td>
-                <td><a th:href="@{/edit-magazine/{id}(id=${magazine.cod})}">Editar</a></td>
+                <!-- <td><a th:href="@{/edit-magazine/{id}(id=${magazine.cod})}">Editar</a></td> -->
                 <td><a th:href="@{/remove-magazine/{id}(id=${magazine.cod})}">Remover</a></td>
             </tr>
             </tbody>

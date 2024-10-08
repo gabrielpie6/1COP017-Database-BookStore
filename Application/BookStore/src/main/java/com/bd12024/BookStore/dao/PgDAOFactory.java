@@ -41,4 +41,9 @@ public class PgDAOFactory extends DAOFactory {
     public CustomerDAO getCustomerDAO() {
         return new PgCustomerDAO(this.connection);
     }
+
+    @Override
+    public ReportDAO getReportDAO() {
+        return new PgReportDAO(this.connection);
+    }
 }

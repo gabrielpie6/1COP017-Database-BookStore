@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Relatórios por Tipo</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tipo de Produto</th>
+                    <th>Total em Estoque</th>
+                    <th>Total Vendido</th>
+                    <th>Preço médio</th>
+                    <th>Produto mais caro</th>
+                    <th>Produto mais barato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${reportsProd}">
+                    <td th:text="${report.productType}"></td>
+                    <td th:text="${report.totalAmount}"></td>
+                    <td th:text="${report.totalSold}"></td>
+                    <td th:text="${report.averagePrice}"></td>
+                    <td th:text="${report.mostExpensiveProduct}"></td>
+                    <td th:text="${report.cheapestProduct}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Relatório por Gênero</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Gênero</th>
+                    <th>Total em Estoque</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${reportsGenres}">
+                    <td th:text="${report.genre}"></td>
+                    <td th:text="${report.totalAmount}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Relatório por Tema</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Total em Estoque</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${reportsThemes}">
+                    <td th:text="${report.theme}"></td>
+                    <td th:text="${report.totalAmount}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

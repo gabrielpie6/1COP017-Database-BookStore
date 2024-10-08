@@ -33,6 +33,29 @@ public class ProductController {
         return "customers-options";
     }
 
+    @GetMapping(value={"/reports"})
+    public String showReports(Model model) {
+        ReportDAO dao;
+        List<ReportByProductsType> reportsByProductsList;
+        List<ReportByGenre>        reportsByGenresList;
+        List<ReportByTheme>        reportsByThemesList;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getReportDAO();
+            reportsByProductsList   = dao.getReportByProductsType();
+            reportsByGenresList     = dao.getReportByGenres();
+            reportsByThemesList     = dao.getReportByThemes();
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("reportsProd",   reportsByProductsList);
+        model.addAttribute("reportsGenres", reportsByGenresList);
+        model.addAttribute("reportsThemes", reportsByThemesList);
+        return "reports";
+    }
+
 
 
 

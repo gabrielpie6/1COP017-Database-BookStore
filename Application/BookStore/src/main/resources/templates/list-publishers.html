@@ -9,8 +9,8 @@
                 <th>Cidade</th>
                 <th>Livros publicados</th>
                 <th>Revistas publicadas</th>
-                <th>Editar</th>
-                <th>Remover</th>
+                <!-- <th>Editar</th> -->
+                <!-- <th>Remover</th> -->
             </tr>
             </thead>
             <tbody>
@@ -19,8 +19,8 @@
                 <td th:text="${publisher.city}"></td>
                 <td th:text="${booksCounts.get(publishers.indexOf(publisher))}"></td>
                 <td th:text="${magazinesCounts.get(publishers.indexOf(publisher))}"></td>
-                <td><a th:href="@{/edit-publisher/{id}(id=${publisher.name})}">Editar</a></td>
-                <td><a th:href="@{/remove-publisher/{id}(id=${publisher.name})}">Remover</a></td>
+                <!-- <td><a th:href="@{/edit-publisher/{id}(id=${publisher.name})}">Editar</a></td> -->
+                <!-- <td><a th:href="@{/remove-publisher/{id}(id=${publisher.name})}">Remover</a></td> -->
             </tr>
             </tbody>
         </table>

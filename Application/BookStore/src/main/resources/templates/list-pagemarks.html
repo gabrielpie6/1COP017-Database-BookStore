@@ -9,8 +9,8 @@
                 <th>Preço</th>
                 <th>Qtd. Estoque</th>
                 <th>Cor</th>
-                <th>Editar</th>
-                <th>Remover</th>
+                <!-- <th>Editar</th> -->
+                <!-- <th>Remover</th> -->
             </tr>
             </thead>
             <tbody>
@@ -19,11 +19,11 @@
                 <td th:text="${pagemark.price.toString}"></td>
                 <td th:text="${pagemark.amount.toString}"></td>
                 <td th:text="${pagemark.color}"></td>
-                <td><a th:href="@{/edit-pagemark/{id}(id=${pagemark.cod})}">Editar</a></td>
-                <td><a th:href="@{/remove-pagemark/{id}(id=${pagemark.cod})}">Remover</a></td>
+                <!-- <td><a th:href="@{/edit-pagemark/{id}(id=${pagemark.cod})}">Editar</a></td> -->
+                <!-- <td><a th:href="@{/remove-pagemark/{id}(id=${pagemark.cod})}">Remover</a></td> -->
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/new-pagemark">Adicionar um novo marcador</a></p>
+    <!-- <p><a href="/new-pagemark">Adicionar um novo marcador</a></p> -->
 </div>
