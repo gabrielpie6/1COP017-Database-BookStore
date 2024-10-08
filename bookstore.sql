@@ -87,6 +87,7 @@ CREATE TABLE bookstore.customer (
     cpf            CHAR(11),
     fname          VARCHAR(100),
     lname          VARCHAR(100),
+    email          VARCHAR(100),
     CEP            CHAR(8),
     address_street VARCHAR(100),
     address_number INT,
