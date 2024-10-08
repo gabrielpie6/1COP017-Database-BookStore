@@ -1,0 +1,39 @@
+<div th:switch="${magazines}">
+    <h2 th:case="null">Ainda não há revistas!</h2>
+    <div th:case="*">
+        <h2>Livros Cadastrados</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Cód. de Produto</th>
+                <th>Preço</th>
+                <th>Qtd. Estoque</th>
+                <th>Nome</th>
+                <th>ISSN</th>
+                <th>No. Páginas</th>
+                <th>Data de publicação</th>
+                <th>Editora</th>
+                <th>Tema</th>
+                <th>Editar</th>
+                <th>Remover</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="magazine : ${magazines}">
+                <td th:text="${magazine.cod.toString}"></td>
+                <td th:text="${magazine.price.toString}"></td>
+                <td th:text="${magazine.amount.toString}"></td>
+                <td th:text="${magazine.fname}"></td>
+                <td th:text="${magazine.ISSN}"></td>
+                <td th:text="${magazine.pages.toString}"></td>
+                <td th:text="${magazine.publication_date.toString}"></td>
+                <td th:text="${magazine.publisher.name}"></td>
+                <td th:text="${magazine.theme.name}"></td>
+                <td><a th:href="@{/edit-magazine/{id}(id=${magazine.cod})}">Editar</a></td>
+                <td><a th:href="@{/remove-magazine/{id}(id=${magazine.cod})}">Remover</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/new-magazine">Adicionar uma nova revista</a></p>
+</div>

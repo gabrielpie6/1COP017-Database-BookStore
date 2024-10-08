@@ -2,8 +2,8 @@ package com.bd12024.BookStore.entities;
 
 public abstract class Product {
     public int cod;
-    public double price;
-    public int amount;
+    public double price = 0.0;
+    public int amount   = 0;
 
 
     public int getCod() {

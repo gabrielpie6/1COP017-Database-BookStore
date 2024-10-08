@@ -1,0 +1,29 @@
+<div th:switch="${pagemarks}">
+    <h2 th:case="null">Ainda não há marcadores!</h2>
+    <div th:case="*">
+        <h2>Marcadores Cadastrados</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Cod. de Produto</th>
+                <th>Preço</th>
+                <th>Qtd. Estoque</th>
+                <th>Cor</th>
+                <th>Editar</th>
+                <th>Remover</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pagemark : ${pagemarks}">
+                <td th:text="${pagemark.cod}"></td>
+                <td th:text="${pagemark.price.toString}"></td>
+                <td th:text="${pagemark.amount.toString}"></td>
+                <td th:text="${pagemark.color}"></td>
+                <td><a th:href="@{/edit-pagemark/{id}(id=${pagemark.cod})}">Editar</a></td>
+                <td><a th:href="@{/remove-pagemark/{id}(id=${pagemark.cod})}">Remover</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/new-pagemark">Adicionar um novo marcador</a></p>
+</div>

@@ -20,12 +20,20 @@ public class PgDAOFactory extends DAOFactory {
     }
 
     @Override
-    public PublisherDAO getPublisherDAO() {
-        return new PgPublisherDAO(this.connection);
-    }
+    public PublisherDAO getPublisherDAO() { return new PgPublisherDAO(this.connection); }
 
     @Override
     public BookDAO getBookDAO() {
         return new PgBookDAO(this.connection);
+    }
+
+    @Override
+    public MagazineDAO getMagazineDAO() {
+        return new PgMagazineDAO(this.connection);
+    }
+
+    @Override
+    public PagemarkDAO getPagemarkDAO() {
+        return new PgPagemarkDAO(this.connection);
     }
 }

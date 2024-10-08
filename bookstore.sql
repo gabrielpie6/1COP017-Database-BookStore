@@ -3,7 +3,7 @@ CREATE SCHEMA bookstore;
 CREATE TABLE bookstore.product (
     cod    INT,
     price  DECIMAL(10, 2),
-    amount INT ,
+    amount INT,
 
     CONSTRAINT pk_product PRIMARY KEY (cod),
     CONSTRAINT amount_positive CHECK (amount >= 0)
@@ -35,9 +35,9 @@ CREATE TABLE bookstore.book (
     fk_genre_fname     VARCHAR(50) NOT NULL,
 
     CONSTRAINT pk_book      PRIMARY KEY (fk_product_cod),
-    CONSTRAINT fk_product   FOREIGN KEY (fk_product_cod)     REFERENCES bookstore.product(cod),
-    CONSTRAINT fk_publisher FOREIGN KEY (fk_publisher_fname) REFERENCES bookstore.publisher(fname),
-    CONSTRAINT fk_genre     FOREIGN KEY (fk_genre_fname)     REFERENCES bookstore.genre(fname),
+    CONSTRAINT fk_product   FOREIGN KEY (fk_product_cod)     REFERENCES bookstore.product(cod)     ON DELETE CASCADE,
+    CONSTRAINT fk_publisher FOREIGN KEY (fk_publisher_fname) REFERENCES bookstore.publisher(fname) ON DELETE CASCADE,
+    CONSTRAINT fk_genre     FOREIGN KEY (fk_genre_fname)     REFERENCES bookstore.genre(fname)     ON DELETE CASCADE,
 
     CONSTRAINT isbn_only_numbers      CHECK (ISBN ~ '^[0-9]{1,13}$'),
     CONSTRAINT publication_year_valid CHECK (publication_year > 0 AND publication_year <= EXTRACT(YEAR FROM CURRENT_DATE))
@@ -48,7 +48,7 @@ CREATE TABLE bookstore.book_author (
     author_name VARCHAR(100),
 
     CONSTRAINT pk_book_author PRIMARY KEY (fk_book_cod, author_name),
-    CONSTRAINT fk_book FOREIGN KEY (fk_book_cod) REFERENCES bookstore.book(fk_product_cod)
+    CONSTRAINT fk_book FOREIGN KEY (fk_book_cod) REFERENCES bookstore.book(fk_product_cod) ON DELETE CASCADE
 );
 
 CREATE TABLE bookstore.theme (
@@ -68,8 +68,9 @@ CREATE TABLE bookstore.magazine (
     fk_theme_fname     VARCHAR(50)  NOT NULL,
 
     CONSTRAINT pk_magazine  PRIMARY KEY (fk_product_cod),
-    CONSTRAINT fk_product   FOREIGN KEY (fk_product_cod)     REFERENCES bookstore.product(cod),
-    CONSTRAINT fk_publisher FOREIGN KEY (fk_publisher_fname) REFERENCES bookstore.publisher(fname),
+    CONSTRAINT fk_product   FOREIGN KEY (fk_product_cod)     REFERENCES bookstore.product(cod)      ON DELETE CASCADE,
+    CONSTRAINT fk_publisher FOREIGN KEY (fk_publisher_fname) REFERENCES bookstore.publisher(fname)  ON DELETE CASCADE,
+    CONSTRAINT fk_theme     FOREIGN KEY (fk_theme_fname)     REFERENCES bookstore.theme(fname)      ON DELETE CASCADE,
 
     CONSTRAINT issn_only_numbers CHECK (ISSN ~ '^[0-9]{8}$')
 );

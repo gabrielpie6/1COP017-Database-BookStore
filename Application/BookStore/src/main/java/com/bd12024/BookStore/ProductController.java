@@ -3,7 +3,7 @@ package com.bd12024.BookStore;
 
 import com.bd12024.BookStore.dao.*;
 import com.bd12024.BookStore.entities.*;
-import org.springframework.boot.SpringApplication;
+// import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +22,21 @@ public class ProductController {
     public String showMainPage(Model model) {
         return "index";
     }
+
+    @GetMapping(value={"/products-options"})
+    public String showProductsOptions(Model model) {
+        return "products-options";
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     @GetMapping(value={"/list-books"})
@@ -285,5 +300,119 @@ public class ProductController {
 
 
 
+    @GetMapping(value={"/list-magazines"})
+    public String showMagazinesList(Model model) {
+        MagazineDAO dao;
 
+        List<Magazine> magazinesList;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getMagazineDAO();
+            magazinesList = dao.all();
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("magazines",      magazinesList);
+        return "list-magazines";
+    }
+    
+    @GetMapping("/new-magazine")
+    public String showFormNewMagazine(Model model){
+        Magazine magazine = new Magazine();
+        magazine.setPublisher(new Publisher("DUMMY", "DUMMY"));
+        magazine.setTheme(new Theme("DUMMY", -1.0));
+
+        model.addAttribute("magazine", magazine);
+        return "new-magazine";
+    }
+
+    @PostMapping("/add-magazine")
+    public String addMagazine(Magazine magazine, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/new-magazine";
+        }
+
+        String publisher_name = magazine.getPublisher().getName();
+        String theme_name     = magazine.getTheme().getName();
+
+
+        PublisherDAO daoPub;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            daoPub = daoFactory.getPublisherDAO();
+            magazine.setPublisher(  daoPub.read(publisher_name) );
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            magazine.setPublisher(new Publisher("NOT_FOUND", "NOT_FOUND") );
+        }
+
+        ThemeDAO daoTheme;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            daoTheme = daoFactory.getThemeDAO();
+            magazine.setTheme(  daoTheme.read(theme_name)  );
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            magazine.setTheme(new Theme("NOT_FOUND", 0.0) );
+        }
+
+
+
+
+        MagazineDAO dao;
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getMagazineDAO();
+            dao.create(magazine);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/new-magazine";
+        }
+
+        return "redirect:/list-magazines";
+    }
+
+    @GetMapping("/remove-magazine/{id}")
+    public String removeMagazine(@PathVariable("id") int id) {
+        MagazineDAO dao;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getMagazineDAO();
+            dao.delete(id);
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/list-magazines";
+        }
+        return "redirect:/list-magazines";
+    }
+
+
+
+
+
+
+
+
+    @GetMapping(value={"/list-pagemarks"})
+    public String showPagemarksList(Model model) {
+        PagemarkDAO dao;
+
+        List<Pagemark> pagemarksList;
+
+        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+            dao = daoFactory.getPagemarkDAO();
+            pagemarksList = dao.all();
+
+        } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
+            System.out.println(ex.getMessage());
+            return "/index";
+        }
+
+        model.addAttribute("pagemarks",      pagemarksList);
+        return "list-pagemarks";
+    }
 }
